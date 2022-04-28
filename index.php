@@ -16,7 +16,7 @@
             <div class="row">
                 <nav class="col-md-3 mt-3">     
 
-                    <a class="btn btn-outline-secondary w=100" role="button" href="index.php">Home</a>
+                    <a class="btn btn-outline-secondary w-100" role="button" href="index.php">Home</a>
 
                     <?php if (isset($_table)) include_once 'includes/ul.inc.php'; ?>
 
@@ -50,7 +50,7 @@
                            print_r($table);
                            print "</pre>";
                         } else {
-                            echo '<a role="button" class="btn btn-primary" href="index.php?add">Ajouter des données</a>';
+                            echo '<a role="button" class="btn btn-primary w-50" href="index.php?add">Ajouter des données</a>';
                         }
                     ?>                                         
                 </section>
