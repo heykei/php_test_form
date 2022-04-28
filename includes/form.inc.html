@@ -1,0 +1,30 @@
+<form>
+  <div class="input-group">
+    <div class="input-group-prentend">
+      <div class="input-group-text">Prénom</div>
+    </div>
+    <input type="text" class="form-control" id="nom" name="user-prenom"  required>
+  </div>
+  <br>
+  <div class="input-group">
+    <div class="input-group-prentend">
+      <div class="input-group-text">Taille (1,26 à 3m)</div>
+    </div>
+    <input type="number" min="1.26" max="3" step="0.01" class="form-control" id="taille" name="user-taille" placeholder="1.7" required>
+  </div>
+  <br>
+  <div class="col-sm-4"> 
+    <input type="radio" class="form-check-input"
+     id="validationFormCheck2" name="user-sex" required>
+    <label class="form-check-label" for="validationFormCheck2"
+     value="f">Femme</label>
+
+    <input type="radio" class="form-check-input"
+     id="validationFormCheck3" name="user-sex" required>
+    <label class="form-check-label" for="validationFormCheck3"
+     value="m">Homme</label>
+
+</div>
+<br>
+<button name="enregistrer" type="submit" class="btn btn-primary float end">Enregistrer les données</button>
+</form>
