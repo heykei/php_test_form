@@ -18,7 +18,7 @@
 
                     <a class="btn btn-outline-secondary w-100" role="button" href="index.php">Home</a>
 
-                    <?php if (isset($_table)) include_once './includes/ul.inc.php'; ?>
+                    <?php if (isset($table)) include_once './includes/ul.inc.php'; ?>
 
                 </nav>
 
@@ -31,25 +31,50 @@
                             $nom = $_POST['user-nom'];
                             $age = $_POST['user-age'];
                             $taille = $_POST['user-taille'];
-                            $sex = $_POST['user-sex'];
+                            $sexe = $_POST['user-sex'];
                             $table = array(
                                 "first_name" => $prenom,
                                 "last_prenom" => $nom,
                                 "age" => $age,
                                 "size" => $taille,
-                                "civility" => $sex,
+                                "civility" => $sexe,
                             );
 
-                            $SESSION["table"] = $table;
+                            $_SESSION['table'] = $table;
                             echo '<p class="alert-success text-center py-3"><strong>Bravo ! </strong>Vous avez vendue votre âme !</p>';
+                        } else {                         
+                                echo '<a role="button" class="btn btn-primary w-50" href="index.php?add">Ajouter des données</a>';
+                            
+                        } ?>
+                        <?php if (isset($_GET['debugging'])) {
+                            echo '<h2 class="text-center mb-5">Débogage</h2>';
+                            echo '<h3 class="fs-6">===> Lecture du tableau à l\'aide de la fonction print_r()</h3>' ;
+                            print '<pre>';
+                            print_r($table);
+                            print '</pre>';
+                        } 
 
-                        } elseif (isset($_GET["debugging"])) {
-                           echo '<h2>Débogage</h2>';
-                           echo "<p>===> Lecture du tableau à l'aide de la fonction print_r()</p>";
-                           print "<pre>";
-                           print_r($table);
-                           print "</pre>";
-                        } else {
+                        elseif (isset($_GET['concatenation'])) {
+                            echo '<h2 class="text-center mb-5">Concaténation</h2>';
+
+                            echo '<h3 class="fs-6">===> Construction d\'une phrase avec le contenu du tableau</h3>';
+                            echo '<p>';
+                            echo ($table['civility'] == 'women') ? 'Mme ' : 'Mr ';
+                            echo $table['first_name'].' '.$table['last_name'];
+                            echo '<br />J\'ai '.$table['age'].' ans et je mesure '.$table['size'].'m.</p>';
+                        }
+                        
+                        elseif (isset($_GET['boule'])) {
+                            # code...
+                        }                       
+                        
+                        elseif (isset($_GET['function'])) {
+                            # code...
+                        }                       
+                        
+                        elseif (isset($_GET['del'])) {
+                            session_destroy();
+                            echo '<p class="alert-success text-center py-3"><strong>Bravo ! </strong>Vous l\'avez récupéré !</p>';
                         }
                     ?>                                         
                 </section>
