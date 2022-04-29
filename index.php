@@ -42,11 +42,8 @@
 
                             $_SESSION['table'] = $table;
                             echo '<p class="alert-success text-center py-3"><strong>Bravo ! </strong>Vous avez vendue votre âme !</p>';
-                        } else {                         
-                                echo '<a role="button" class="btn btn-primary w-50" href="index.php?add">Ajouter des données</a>';
-                            
-                        } ?>
-                        <?php if (isset($_GET['debugging'])) {
+                         
+                        } elseif (isset($_GET['debugging'])) {
                             echo '<h2 class="text-center mb-5">Débogage</h2>';
                             echo '<h3 class="fs-6">===> Lecture du tableau à l\'aide de la fonction print_r()</h3>' ;
                             print '<pre>';
@@ -76,6 +73,10 @@
                             session_destroy();
                             echo '<p class="alert-success text-center py-3"><strong>Bravo ! </strong>Vous l\'avez récupéré !</p>';
                         }
+
+                         else {                         
+                        echo '<a role="button" class="btn btn-primary w-50" href="index.php?add">Ajouter des données</a>';                  
+                    }
                     ?>                                         
                 </section>
             </div>
