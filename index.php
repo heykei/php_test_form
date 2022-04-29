@@ -50,8 +50,8 @@
                            print_r($table);
                            print "</pre>";
                         } else {
-                            echo '<a role="button" class="btn btn-primary w-50" href="index.php?add">Ajouter des données</a>';
                         }
+                        echo '<a role="button" class="btn btn-primary w-50" href="index.php?add">Ajouter des données</a>';
                     ?>                                         
                 </section>
             </div>
