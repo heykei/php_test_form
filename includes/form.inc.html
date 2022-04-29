@@ -1,16 +1,17 @@
-<form>
+<form method="post" action="index.php">
   <p class="h1 text-center">Ajouter des données</p>
   <div class="form-floating">
-    <input type="text" class="form-control" id="firstname" placeholder="Prénom">
+    <input type="text" class="form-control" id="firstname" placeholder="Prénom" required>
     <label for="floatingPassword">Prénom</label>
   </div>
   <br>
   <div class="form-floating">
-    <input type="text" class="form-control" id="lastname" placeholder="Nom">
+    <input type="text" class="form-control" id="lastname" placeholder="Nom" required>
     <label for="floatingPassword">Nom</label>
   </div>
   <br>
   <div>
+    <p>Age (18 à 70 ans)</p>
     <input type="number" min="18" max="70" class="form-control" id="age" name="user-age" placeholder="Renseignez votre âge" required>
   </div>
   <br>
@@ -37,5 +38,7 @@
 
 </div>
 <br>
-<button name="enregistrer" type="submit" class="btn btn-primary float end">Enregistrer les données</button>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+<button name="enregistrer" type="submit" class="btn btn-primary float end" >Enregistrer les données</button>
+</div>
 </form>

@@ -6,11 +6,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-    <?php include_once 'includes/head.inc.html'; ?>
+    <?php include_once './includes/head.inc.html'; ?>
 
     <body>
 
-        <?php include_once 'includes/header.inc.html'; ?>
+        <?php include_once './includes/header.inc.html'; ?>
 
         <div class="container">
             <div class="row">
@@ -18,13 +18,13 @@
 
                     <a class="btn btn-outline-secondary w-100" role="button" href="index.php">Home</a>
 
-                    <?php if (isset($_table)) include_once 'includes/ul.inc.php'; ?>
+                    <?php if (isset($_table)) include_once './includes/ul.inc.php'; ?>
 
                 </nav>
 
                 <section class="col-md-9 mt-3">
                     <?php if (isset($_GET['add'])){
-                            include_once 'includes/form.inc.html';
+                            include_once './includes/form.inc.html';
                         }
                         elseif(isset($_POST['enregistrer'])){
                             $prenom = $_POST['user-prenom'];
@@ -41,7 +41,7 @@
                             );
 
                             $SESSION["table"] = $table;
-                            echo '<p class="alert-succes texte-center py-3"> Données sauvegardées </p>';
+                            echo '<p class="alert-success text-center py-3"><strong>Bravo ! </strong>Vous avez vendue votre âme !</p>';
 
                         } elseif (isset($_GET["debugging"])) {
                            echo '<h2>Débogage</h2>';
