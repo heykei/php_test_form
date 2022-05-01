@@ -34,7 +34,7 @@
                             $sexe = $_POST['user-sex'];
                             $table = array(
                                 "first_name" => $prenom,
-                                "last_prenom" => $nom,
+                                "last_name" => $nom,
                                 "age" => $age,
                                 "size" => $taille,
                                 "civility" => $sexe,
@@ -53,22 +53,37 @@
 
                         elseif (isset($_GET['concatenation'])) {
                             echo '<h2 class="text-center mb-5">Concaténation</h2>';
-
                             echo '<h3 class="fs-6">===> Construction d\'une phrase avec le contenu du tableau</h3>';
                             echo '<p>';
-                            echo ($table['civility'] == 'women') ? 'Mme ' : 'Mr ';
-                            echo $table['first_name'].' '.$table['last_name'];
+                            echo $civility=($table['civility'] == 'femme') ? 'Mme ' : 'Mr ';
+                            echo $table['first_name'] .' '. $table['last_name'];
                             echo '<br />J\'ai '.$table['age'].' ans et je mesure '.$table['size'].'m.</p>';
                         }
                         
-                        elseif (isset($_GET['boule'])) {
-                            # code...
+                        elseif (isset($_GET['loop'])) {
+                            echo "<h2 class='text-center'>Boucle</h2><br>";
+                            echo "<h3 class='fs-6'>===> Lecture du tableau à l'aide d'une boucle foreach</h3><br>";
+                            $table = $_SESSION['table'];
+                            $i = 0;
+                            foreach ($table as $x => $value) {
+                                echo '<div>à la ligne n°'. $i . 'correspond la clé"' . $x .'" et contient "'.$value .'"</div>';
+                                $i++;
+                            }
                         }                       
                         
                         elseif (isset($_GET['function'])) {
-                            # code...
-                        }                       
-                        
+                            echo "<h2 class='text-center'>Fonction</h2><br>";
+                            echo "<h3 class='fs-6'>===> J'utilise ma function readTable()</h3><br>";
+                            function readTable() {
+                                $table = $_SESSION['table'];
+                                $i = 0;
+                                foreach ($table as $x => $value) {
+                                    echo '<div>à la ligne n°'. $i . 'correspond la clé"' . $x .'" et contient "'.$value .'"</div>';
+                                    $i++;
+                                  }
+                            } 
+                        readTable();                   
+                        }
                         elseif (isset($_GET['del'])) {
                             session_destroy();
                             echo '<p class="alert-success text-center py-3"><strong>Bravo ! </strong>Vous l\'avez récupéré !</p>';

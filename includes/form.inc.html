@@ -1,12 +1,12 @@
 <form method="post" action="index.php">
   <p class="h1 text-center">Ajouter des données</p>
   <div class="form-floating">
-    <input type="text" class="form-control" id="user-nom" name="user-nom" placeholder="Prénom" required>
+    <input type="text" class="form-control" id="user-prenom" name="user-prenom" placeholder="Prenom" required>
     <label for="floatingPassword">Prénom</label>
   </div>
   <br>
   <div class="form-floating">
-    <input type="text" class="form-control" id="user-prenom" name="user-prenom" placeholder="Nom" required>
+    <input type="text" class="form-control" id="user-nom" name="user-nom" placeholder="Nom" required>
     <label for="floatingPassword">Nom</label>
   </div>
   <br>
@@ -26,16 +26,12 @@
   </div>
   <br>
   <div class="col-sm-4"> 
-    <input type="radio" class="form-check-input"
-     id="validationFormCheck2" name="user-sex" required>
-    <label class="form-check-label" for="validationFormCheck2"
-     value="f">Femme</label>
+    <input type="radio" value="femme" class="form-check-input" name="user-sex" required>
+    <label class="form-check-label" for="Femme">Femme</label>
 
-    <input type="radio" class="form-check-input"
-     id="validationFormCheck3" name="user-sex" required>
-    <label class="form-check-label" for="validationFormCheck3"
-     value="m">Homme</label>
-
+    <input type="radio" value="homme" class="form-check-input" name="user-sex" required>
+    <label class="form-check-label" for="Homme">Homme</label>
+  </div>
 </div>
 <br>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
