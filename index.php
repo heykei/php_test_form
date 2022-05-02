@@ -53,18 +53,24 @@
 
                         elseif (isset($_GET['concatenation'])) {
                             echo '<h2 class="text-center mb-5">Concaténation</h2>';
+
+                            //Affichage contenue du tableau
                             echo '<h3 class="fs-6">===> Construction d\'une phrase avec le contenu du tableau</h3>';
                             echo '<p>';
                             echo $civility=($table['civility'] == 'femme') ? 'Mme ' : 'Mr ';
                             echo ucwords($table['first_name']) .' '. ucwords($table['last_name']);
                             echo '<br />J\'ai '.$table['age'].' ans et je mesure '.$table['size'].'m.</p>';
                             
+                            //Mise a jour du tableau pour construire une phrase
                             echo '<h3 class="fs-6">===> Construction d\'une phrase après MAJ du tableau</h3>';
+                            $table['first_name'] = ucfirst ($table['first_name']);
+                            $table['last_name'] = strtoupper ($table['last_name']);
                             echo '<p>';
                             echo $civility=($table['civility'] == 'femme') ? 'Mme ' : 'Mr ';
-                            echo ucwords($table['first_name']) .' '. strtoupper($table['last_name']);
+                            echo $table['first_name'] .' '. $table['last_name'];
                             echo '<br />J\'ai '.$table['age'].' ans et je mesure '.$table['size'].'m.</p>';
-
+                            
+                            //Partie 3 Point à la place de la virgule
                             echo '<h3 class="fs-6">===> Affichage d\'une virgule à la place du point pour la taille</h3>';
                             echo '<p>';
                             echo $civility=($table['civility'] == 'femme') ? 'Mme ' : 'Mr ';
