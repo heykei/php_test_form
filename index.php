@@ -56,10 +56,21 @@
                             echo '<h3 class="fs-6">===> Construction d\'une phrase avec le contenu du tableau</h3>';
                             echo '<p>';
                             echo $civility=($table['civility'] == 'femme') ? 'Mme ' : 'Mr ';
-                            echo $table['first_name'] .' '. $table['last_name'];
+                            echo ucwords($table['first_name']) .' '. ucwords($table['last_name']);
                             echo '<br />J\'ai '.$table['age'].' ans et je mesure '.$table['size'].'m.</p>';
+                            
+                            echo '<h3 class="fs-6">===> Construction d\'une phrase après MAJ du tableau</h3>';
+                            echo '<p>';
+                            echo $civility=($table['civility'] == 'femme') ? 'Mme ' : 'Mr ';
+                            echo ucwords($table['first_name']) .' '. strtoupper($table['last_name']);
+                            echo '<br />J\'ai '.$table['age'].' ans et je mesure '.$table['size'].'m.</p>';
+
+                            echo '<h3 class="fs-6">===> Affichage d\'une virgule à la place du point pour la taille</h3>';
+                            echo '<p>';
+                            echo $civility=($table['civility'] == 'femme') ? 'Mme ' : 'Mr ';
+                            echo ucwords($table['first_name']) .' '. strtoupper($table['last_name']);
+                            echo '<br />J\'ai '.$table['age'].' ans et je mesure '. $taille = str_replace('.',',', $table['size']).'m.</p>';
                         }
-                        
                         elseif (isset($_GET['loop'])) {
                             echo "<h2 class='text-center'>Boucle</h2><br>";
                             echo "<h3 class='fs-6'>===> Lecture du tableau à l'aide d'une boucle foreach</h3><br>";
