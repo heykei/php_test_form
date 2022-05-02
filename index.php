@@ -105,11 +105,16 @@
                             session_destroy();
                             echo '<p class="alert-success text-center py-3"><strong>Bravo ! </strong>Vous l\'avez récupéré !</p>';
                         }
-
-                         else {                         
-                        echo '<a role="button" class="btn btn-primary w-50" href="index.php?add">Ajouter des données</a>';                  
+// start second form
+                        if (isset($_GET['addmore'])){
+                            include_once './includes/form2.inc.php';
+                            
+                        }
+                        else {                         
+                        echo '<a role="button" class="btn btn-primary me-3 w-40" href="index.php?add">Ajouter des données</a>';
+                        echo '<a role="button" class="btn btn-secondary w-40" href="index.php?addmore">Ajouter plus de données</a>';                                                  
                     }
-                    ?>                                         
+                    ?>
                 </section>
             </div>
         </div>
