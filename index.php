@@ -58,14 +58,27 @@
                                     $react = $_POST['react'];
                                     $color = $_POST['color'];
                                     $date = $_POST['date'];
-                                    $img = $_FILES['img'];
-                                    $file_name = $_FILES['img']['name'];
-                                    $file_type = $_FILES['img']['type'];
-                                    $file_tmp = $_FILES['img']['tmp_name'];
-                                    $file_error = $_FILES['img']['error'];
-                                    $file_size = $_FILES['img']['size'];
-                                    $file_ext=strtolower(end(explode('.',$_FILES['img']['name'])));
-                                    $extensions= array("jpg","png");
+                                    $image = array 
+                                    (
+                                    "name" => $name = $_FILES['img']['name'],
+                                    "type" =>$type = $_FILES['img']['type'],
+                                    "tmpname" =>$tmpName = $_FILES['img']['tmp_name'],
+                                    "error" =>$error = $_FILES['img']['error'],
+                                    "size" =>$filesize = $_FILES['img']['size'],
+                                    );
+                                    
+                                    $tabExtension = explode('.', $name);
+                                    $extension = strtolower(end($tabExtension));
+                                    //Tableau des extensions que l'on accepte
+                                    $extensions = ['jpg', 'png',];
+                                    $maxSize = 200000;
+                                    if(in_array($extension, $extensions) && $size <= $maxSize)
+                                    {
+                                    move_uploaded_file($tmpName, './uploaded/'.$name);
+                                    }
+                                    else {
+                                    echo'<p class="alert-danger text-center py-3">Danger</p>';
+                                    }
                                     $table = array(          
                                         "first_name" => $prenom,
                                         "last_name"  =>  $nom,
@@ -82,13 +95,7 @@
                                         "react" => $react,
                                         "color" => $color,
                                         "date" => $date,
-                                        "img" => array(
-                                            "name" => $file_name,
-                                            "type" => $file_type,
-                                            "tmp_name" => $file_tmp,
-                                            "error" => $file_error,
-                                            "size" => $file_size,
-                                        )
+                                        "img" => $image,
                                         
                                     );
                                     
