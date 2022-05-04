@@ -149,32 +149,48 @@
                                             echo $table["first_name"] ." ". $table["last_name"];
                                             echo " <br>J'ai " . $table["age"] . " ans et je mesure " . $table['size'] . "m.</p><br><br>";
             
-                                        } elseif (isset($_GET['loop'])) {
-            
+                                        } else if (isset($_GET['loop'])) {
+
                                             echo "<h2 class='text-center'>Boucle</h2><br>";
-                                            echo "<h3 class='fs-5'>===> Lecture du tableau à l'aide d'une boucle foreach</h3><br>";
+                                            echo "<p>===> Lecture du tableau à l'aide d'une boucle foreach</p><br>";
                                             $table = $_SESSION['table'];
                                             $i = 0;
                                             foreach ($table as $x => $value) {
+                                                if ($x == 'img') {
+                                                unset($value);
+                                                echo '<div>à la ligne n°' . $i . ' correspond la clé "' . $x . '" et contient</div>';
+                                                echo "<img class='w-100' src='./uploaded/".$table['img']['name']."'>"; 
+                                                } else {
                                                 echo '<div>à la ligne n°' . $i . ' correspond la clé "' . $x . '" et contient "' . $value . '"</div>';
                                                 $i++;
+                                                }
                                             }
-                                            
-                                        } elseif (isset($_GET['function'])){     
-                
+                                        
+                                        } else if (isset($_GET['function'])){     
+
                                             echo "<h2 class='text-center'>Fonction</h2><br>";
-                                            echo "<h3 class='fs-5'>===> J'utilise ma fonction readTable()</h3><br>";
+                                            echo "<p>===> J'utilise ma fonction readTable()</p><br>";
                                             function readTable(){
                                                 $table = $_SESSION['table'];
                                                 $i = 0;
+                                                
                                                 foreach ($table as $x => $value) {
+                                                    if ($x == 'img') {
+                                                    unset($value);
+                                                    echo '<div>à la ligne n°' . $i . ' correspond la clé "' . $x . '" et contient</div>';
+                                                    echo "<img class='w-100' src='./uploaded/".$table['img']['name']."'>"; 
+                                                    } else {
                                                     echo '<div>à la ligne n°' . $i . ' correspond la clé "' . $x . '" et contient "' . $value . '"</div>';
                                                     $i++;
+                                                    }
                                                 }
+                                                
                                             }  
                                             readTable();   
-                                            echo "<img src='./uploaded/$file_name'>";
-                                        
+                                            
+                                                
+            
+                                            
                                         } elseif (isset($_GET['del'])) {
                                             unset ($_SESSION['table']);
                                             if (empty($_SESSION['table'])) {
