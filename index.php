@@ -40,24 +40,42 @@
 
                                 elseif(isset($_GET['addmore'])) {
                                     include './includes/form2.inc.php';
-                                } 
+                                }
 
                                 elseif(isset($_POST['enregistrer'])) {
-                                    $prenom = $_POST['first_name'];
-                                    $nom = $_POST['last_name'];
-                                    $age = $_POST['age'];
-                                    $taille = $_POST['size'];
-                                    $sex = $_POST['genre'];
-                                    $html = $_POST['html'];
-                                    $css = $_POST['css'];
-                                    $javascript = $_POST['js'];
-                                    $php = $_POST['php'];
-                                    $mysql = $_POST['mysql'];
-                                    $bootstrap = $_POST['bootstrap'];
-                                    $symfony = $_POST['symfony'];
-                                    $react = $_POST['react'];
-                                    $color = $_POST['color'];
-                                    $date = $_POST['date'];
+                                    $prenom = htmlspecialchars($_POST['first_name']);
+                                    $nom = htmlspecialchars($_POST['last_name']);
+                                    $age = htmlspecialchars($_POST['age']);
+                                    $taille = htmlspecialchars($_POST['size']);
+                                    $sex = htmlspecialchars($_POST['genre']);
+                                    $table = array(          
+                                        "first_name" => $prenom,
+                                        "last_name"  =>  $nom,
+                                        "age" => $age,
+                                        "size" => $taille,
+                                        "civility" => $sex,
+                                    );
+                                    $_SESSION["table"] = $table; 
+                                    echo '<p class="alert-success text-center py-3"> Données sauvegardées</p>';
+
+                                }
+                                
+                                elseif(isset($_POST['enregistrer2'])) {
+                                    $prenom = htmlspecialchars($_POST['first_name']);
+                                    $nom = htmlspecialchars($_POST['last_name']);
+                                    $age = htmlspecialchars($_POST['age']);
+                                    $taille = htmlspecialchars($_POST['size']);
+                                    $sex = htmlspecialchars($_POST['genre']);
+                                    $html = htmlspecialchars($_POST['html']);
+                                    $css = htmlspecialchars($_POST['css']);
+                                    $javascript = htmlspecialchars($_POST['js']);
+                                    $php = htmlspecialchars($_POST['php']);
+                                    $mysql = htmlspecialchars($_POST['mysql']);
+                                    $bootstrap = htmlspecialchars($_POST['bootstrap']);
+                                    $symfony = htmlspecialchars($_POST['symfony']);
+                                    $react = htmlspecialchars($_POST['react']);
+                                    $color = htmlspecialchars($_POST['color']);
+                                    $date = htmlspecialchars($_POST['date']);
                                     $image = array 
                                     (
                                     "name" => $name = $_FILES['img']['name'],
@@ -65,20 +83,8 @@
                                     "tmpname" =>$tmpName = $_FILES['img']['tmp_name'],
                                     "error" =>$error = $_FILES['img']['error'],
                                     "size" =>$filesize = $_FILES['img']['size'],
-                                    );
+                                    );                                   
                                     
-                                    $tabExtension = explode('.', $name);
-                                    $extension = strtolower(end($tabExtension));
-                                    //Tableau des extensions que l'on accepte
-                                    $extensions = ['jpg', 'png',];
-                                    $maxSize = 200000;
-                                    if(in_array($extension, $extensions) && $size <= $maxSize)
-                                    {
-                                    move_uploaded_file($tmpName, './uploaded/'.$name);
-                                    }
-                                    else {
-                                    echo'<p class="alert-danger text-center py-3">Danger</p>';
-                                    }
                                     $table = array(          
                                         "first_name" => $prenom,
                                         "last_name"  =>  $nom,
@@ -95,26 +101,48 @@
                                         "react" => $react,
                                         "color" => $color,
                                         "date" => $date,
-                                        "img" => $image,
-                                        
+                                        "img" => $image,                                      
                                     );
-                                    
-                                    $_SESSION["table"] = $table; 
-                                    echo '<p class="alert-success text-center py-3"> Données sauvegardées</p>';
 
-                                    if(empty($errors)==true){
-                                        move_uploaded_file($file_tmp,'./uploaded/'.$file_name);
-                                        echo '<p class="alert-danger text-center py-3"> error: 1</p>';
-                                    }else{
-                                        print_r($errors);
+                                    $tabExtension = explode('.', $name);
+                                    $extension = strtolower(end($tabExtension));
+                                    //Tableau des extensions que l'on accepte
+                                    $extensions = ['jpg', 'png',];
+                                    if (isset($_FILES) && $_FILES['img']['error'] == 0) {
+                                        if($filesize < 2097152){
+                                            if(in_array($extension,$tabExtension)== true){
+                                                move_uploaded_file($tmpName,"./uploaded/".$name);
+                                                $_SESSION['table'] = $table;
+                                                echo "<p class='alert-success text-center py-3'> Nouvelles données sauvegardées ! </p>";
+                                            }
+                                            else {
+                                                echo "<p class='alert-danger text-center py-3'> Extention ''$extensions'' non prise en charge! </p> ";
+                                            }
+                                        }
+                                        else {
+                                            echo "<p class='alert-danger text-center py-3'> La taille de l'image doit être inférieure à 2Mo !</p>";
+                                        }
                                     }
+                                    else {
+            
+                                        if($_FILES['img']['error'] == 4)  {
+                                            $message= 'Aucun fichier n\'a été téléchargé !';
+                                            echo "<p class='alert-danger text-center py-3'> $message !</p>";
+                                        }
+                                        else{
+                                            $message= 'error: ' .$_FILES['img']['error'];
+                                            echo "<p class='alert-danger text-center py-3'> $message !</p>";
+                                        }
+                                    }  
+                                }
                                     
-                                    } else {
+                                    else {
                                         if (isset($table)) {
 
                                         if(isset($_GET["debugging"])) {
                                             echo '<h2 class="text-center">Débogage</h2>';
                                             echo "<h3 class='fs-5'>===> Lecture du tableau à l'aide de la fonction print_r() </h3>";
+                                            $table = array_filter($table);
                                             print "<pre>";
                                             print_r($table);
                                             print "</pre>";
@@ -154,6 +182,7 @@
                                             echo "<h2 class='text-center'>Boucle</h2><br>";
                                             echo "<p>===> Lecture du tableau à l'aide d'une boucle foreach</p><br>";
                                             $table = $_SESSION['table'];
+                                            $table = array_filter($table);
                                             $i = 0;
                                             foreach ($table as $x => $value) {
                                                 if ($x == 'img') {
@@ -163,7 +192,7 @@
                                                 } else {
                                                 echo '<div>à la ligne n°' . $i . ' correspond la clé "' . $x . '" et contient "' . $value . '"</div>';
                                                 $i++;
-                                                }
+                                                 }
                                             }
                                         
                                         } else if (isset($_GET['function'])){     
@@ -172,6 +201,7 @@
                                             echo "<p>===> J'utilise ma fonction readTable()</p><br>";
                                             function readTable(){
                                                 $table = $_SESSION['table'];
+                                                $table = array_filter($table);
                                                 $i = 0;
                                                 
                                                 foreach ($table as $x => $value) {
@@ -191,12 +221,14 @@
                                                 
             
                                             
-                                        } elseif (isset($_GET['del'])) {
-                                            unset ($_SESSION['table']);
-                                            if (empty($_SESSION['table'])) {
-                                                echo '<p class="alert-success text-center py-3"> Données suprimées</p>';
-                                            }
-                                        
+                                        }elseif (isset($_GET['del'])) {
+                                             $picture = "./uploaded/".$table['img']['name'];
+                                                if (isset($picture)) {
+                                                 @unlink($picture);
+                                                } 
+                                                unset ($_SESSION['table']);
+                                                session_destroy(); 
+                                                echo '<p class="alert-success text-center py-3"> Données supprimées !</p>';        
                                         }else { 
                                             echo '<a role="button" class=" btn btn-primary" href="index.php?add">Ajouter des données</a>'; 
                                             echo '<a role="button" class=" btn btn-secondary ms-2" href="index.php?addmore">Ajouter plus de données</a>'; 

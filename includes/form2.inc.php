@@ -71,7 +71,7 @@
         </div> 
 
         <div class="d-flex flex-row-reverse bd-highlight mt-4">
-            <button name="enregistrer" type="submit" class="btn btn-primary">Enregistrer des données</button>
+            <button name="enregistrer2" type="submit" class="btn btn-primary">Enregistrer des données</button>
         </div>
     </div> 
 </div>   
