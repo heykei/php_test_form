@@ -109,14 +109,14 @@
                                     //Tableau des extensions que l'on accepte
                                     $extensions = ['jpg', 'png',];
                                     if (isset($_FILES) && $_FILES['img']['error'] == 0) {
-                                        if($filesize < 2097152){
-                                            if(in_array($extension,$tabExtension)== true){
+                                        if($filesize < 2000000){
+                                            if(in_array($extension,$extensions)== true){
                                                 move_uploaded_file($tmpName,"./uploaded/".$name);
                                                 $_SESSION['table'] = $table;
                                                 echo "<p class='alert-success text-center py-3'> Nouvelles données sauvegardées ! </p>";
                                             }
                                             else {
-                                                echo "<p class='alert-danger text-center py-3'> Extention ''$extensions'' non prise en charge! </p> ";
+                                                echo "<p class='alert-danger text-center py-3'> Extention ''$type'' non prise en charge! </p> ";
                                             }
                                         }
                                         else {
